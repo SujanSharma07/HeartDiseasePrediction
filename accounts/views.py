@@ -71,13 +71,10 @@ def user_login(request):
             if user.is_active:
                 login(request, user)
                 request.session['user_id'] = user.profile.pk
-
                 return HttpResponseRedirect(reverse('predict:predict', kwargs={'pk': user.profile.pk}))
             else:
                 return HttpResponse("Account not active")
         else:
-            print("Tried login and failed")
-            print("username: {} and password: {}".format(username, password))
             return HttpResponse("Invalid login details supplied!")
 
     else:
